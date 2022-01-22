@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Epoche.MVVM.ViewModels.SourceGen": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\Epoche.Accounting.ViewModels\\Epoche.Accounting.ViewModels.csproj"
+    }
+  }
+}
