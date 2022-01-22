@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Epoche.MVVM.Models\Epoche.MVVM.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Navigation\" />
+  </ItemGroup>
+
 </Project>

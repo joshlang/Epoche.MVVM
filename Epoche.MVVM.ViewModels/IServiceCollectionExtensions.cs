@@ -29,9 +29,7 @@ public static class IServiceCollectionExtensions
                 services.AddSingleton<INavigator, Navigator>();
             }
         }
-
-        return services
-            .AddSingleton<INotificationService, NullNotificationService>();
+        return services;
     }
 
     public static IServiceCollection AddViewModelsInAssembly(this IServiceCollection services, Assembly assembly)
