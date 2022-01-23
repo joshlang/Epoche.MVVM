@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Epoche.MVVM.ViewModels.Navigation.Presentation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Epoche.MVVM.ViewModels.Navigation;
 public static class IServiceCollectionExtensions
@@ -12,6 +13,20 @@ public static class IServiceCollectionExtensions
             services.AddSingleton<IPresenter, NullPresenter>();
         }
 
+        return services;
+    }
+
+    public static IServiceCollection AddEpocheViewModelPresentationHelpers(this IServiceCollection services, bool scoped = false)
+    {
+        services.AddTransient(typeof(IViewModelContainer<>), typeof(ViewModelContainerFactory<>));
+        if (scoped)
+        {
+            services.AddScoped<IViewModelManager, ViewModelManager>();
+        }
+        else
+        {
+            services.AddSingleton<IViewModelManager, ViewModelManager>();
+        }
         return services;
     }
 }
