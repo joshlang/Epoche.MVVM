@@ -1,4 +1,4 @@
-﻿namespace Epoche.MVVM.ViewModels;
+﻿namespace Epoche.MVVM.ViewModels.Navigation;
 
 public interface INavigator
 {

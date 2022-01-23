@@ -1,4 +1,4 @@
-﻿namespace Epoche.MVVM.ViewModels;
+﻿namespace Epoche.MVVM.ViewModels.Navigation;
 
 public abstract class NavigableViewModelBase : ViewModelBase
 {

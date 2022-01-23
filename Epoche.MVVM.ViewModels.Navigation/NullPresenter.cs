@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Epoche.MVVM.ViewModels;
+namespace Epoche.MVVM.ViewModels.Navigation;
 
 sealed class NullPresenter : IPresenter
 {

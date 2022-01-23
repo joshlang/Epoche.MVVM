@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using Epoche.MVVM.ViewModels.Events;
 
-namespace Epoche.MVVM.ViewModels;
+namespace Epoche.MVVM.ViewModels.Navigation;
 
-public sealed class Navigator : INavigator
+sealed class Navigator : INavigator
 {
     readonly HashSet<Assembly> ScannedAssemblies = new();
     readonly Dictionary<Type, Type> ContainerTypesByType = new();
