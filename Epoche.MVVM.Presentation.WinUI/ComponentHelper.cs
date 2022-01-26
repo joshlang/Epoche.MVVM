@@ -12,6 +12,7 @@ sealed class ComponentHelper
 
         var pairs = assemblies
             .SelectMany(x => x.GetTypes())
+            .Where(x => !x.IsAbstract)
             .Select(x =>
             {
                 var target = x.GetGenericInterfaces(typeof(ITarget<>)).SingleOrDefault();

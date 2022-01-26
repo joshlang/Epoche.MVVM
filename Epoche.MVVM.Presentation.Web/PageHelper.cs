@@ -14,6 +14,7 @@ sealed class PageHelper
 
         PageRouting = assemblies
             .SelectMany(x => x.GetTypes())
+            .Where(x => !x.IsAbstract)
             .Where(x => x.IsSubclassOf(typeof(ComponentBase)))
             .Select(x =>
             {
