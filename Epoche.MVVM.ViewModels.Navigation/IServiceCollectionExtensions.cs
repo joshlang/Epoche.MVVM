@@ -4,29 +4,20 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Epoche.MVVM.ViewModels.Navigation;
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddEpocheViewModelNavigator(this IServiceCollection services)
+    public static IServiceCollection AddEpocheViewModelNavigator(this IServiceCollection services) => services.AddSingleton<INavigator, Navigator>();
+
+    public static IServiceCollection AddEpocheViewModelNullPresenter(this IServiceCollection services, bool overwriteExistingPresenter)
     {
-        services.AddSingleton<INavigator, Navigator>();
-
-        if (!services.Any(x => x.ServiceType == typeof(IPresenter)))
+        if (overwriteExistingPresenter && services.Any(x => x.ServiceType == typeof(IPresenter)))
         {
-            services.AddSingleton<IPresenter, NullPresenter>();
+            return services;
         }
-
-        return services;
+        return services.AddSingleton<IPresenter, NullPresenter>();
     }
+    
+    public static IServiceCollection AddEpocheViewModelPresenter(this IServiceCollection services) => services.AddSingleton<IPresenter, Presenter>();
 
-    public static IServiceCollection AddEpocheViewModelPresentationHelpers(this IServiceCollection services, bool scoped = false)
-    {
-        services.AddTransient(typeof(IViewModelContainer<>), typeof(ViewModelContainerFactory<>));
-        if (scoped)
-        {
-            services.AddScoped<IViewModelManager, ViewModelManager>();
-        }
-        else
-        {
-            services.AddSingleton<IViewModelManager, ViewModelManager>();
-        }
-        return services;
-    }
+    public static IServiceCollection AddEpocheViewModelPresentationHelpers(this IServiceCollection services) => services
+        .AddTransient(typeof(IViewModelContainer<>), typeof(ViewModelContainerFactory<>))
+        .AddSingleton<IViewModelManager, ViewModelManager>();
 }

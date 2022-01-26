@@ -8,6 +8,7 @@ public abstract partial class ViewModelBase
         public string? OnChange { get; set; }
         public string? EqualityComparer { get; set; }
         public bool TrackChanges { get; set; } = true;
+        public bool PrivateSetter { get; set; }
         public PropertyAttribute(string? name = null)
         {
             Name = name;

@@ -5,17 +5,17 @@ public class PubSubEvent
     readonly List<EventSubscription> Subscriptions = new();
     public SynchronizationContext? SynchronizationContext { get; internal set; }
 
-    public SubscriptionToken Subscribe(Action action) => Subscribe(action, ThreadOption.PublisherThread);
-    public SubscriptionToken Subscribe(Action action, ThreadOption threadOption) => Subscribe(action, threadOption, false);
-    public SubscriptionToken Subscribe(Action action, bool keepSubscriberReferenceAlive) => Subscribe(action, ThreadOption.PublisherThread, keepSubscriberReferenceAlive);
-    public SubscriptionToken Subscribe(Action action, ThreadOption threadOption, bool keepSubscriberReferenceAlive)
+    public SubscriptionToken Subscribe(Action action) => Subscribe(action, SubscriptionOption.UI);
+    public SubscriptionToken Subscribe(Action action, SubscriptionOption threadOption) => Subscribe(action, threadOption, false);
+    public SubscriptionToken Subscribe(Action action, bool keepSubscriberReferenceAlive) => Subscribe(action, SubscriptionOption.UI, keepSubscriberReferenceAlive);
+    public SubscriptionToken Subscribe(Action action, SubscriptionOption threadOption, bool keepSubscriberReferenceAlive)
     {
         var actionReference = new DelegateReference(action, keepSubscriberReferenceAlive);
         var token = new SubscriptionToken(Unsubscribe);
         var subscription = threadOption switch
         {
-            ThreadOption.BackgroundThread => new BackgroundEventSubscription(actionReference, token),
-            ThreadOption.UIThread when SynchronizationContext is not null => new DispatcherEventSubscription(actionReference, token, SynchronizationContext),
+            SubscriptionOption.Asynchronous => new AsyncEventSubscription(actionReference, token),
+            SubscriptionOption.UI when SynchronizationContext is not null => new UIEventSubscription(actionReference, token, SynchronizationContext),
             _ => new EventSubscription(actionReference, token)
         };
         lock (Subscriptions)
@@ -78,20 +78,20 @@ public class PubSubEvent<TPayload>
     readonly List<EventSubscription<TPayload>> Subscriptions = new();
     public SynchronizationContext? SynchronizationContext { get; internal set; }
 
-    public SubscriptionToken Subscribe(Action<TPayload> action) => Subscribe(action, ThreadOption.PublisherThread);
-    public SubscriptionToken Subscribe(Action<TPayload> action, Predicate<TPayload> filter) => Subscribe(action, ThreadOption.PublisherThread, false, filter);
-    public SubscriptionToken Subscribe(Action<TPayload> action, ThreadOption threadOption) => Subscribe(action, threadOption, false);
-    public SubscriptionToken Subscribe(Action<TPayload> action, bool keepSubscriberReferenceAlive) => Subscribe(action, ThreadOption.PublisherThread, keepSubscriberReferenceAlive);
-    public SubscriptionToken Subscribe(Action<TPayload> action, ThreadOption threadOption, bool keepSubscriberReferenceAlive) => Subscribe(action, threadOption, keepSubscriberReferenceAlive, null);
-    public SubscriptionToken Subscribe(Action<TPayload> action, ThreadOption threadOption, bool keepSubscriberReferenceAlive, Predicate<TPayload>? filter)
+    public SubscriptionToken Subscribe(Action<TPayload> action) => Subscribe(action, SubscriptionOption.Synchronous);
+    public SubscriptionToken Subscribe(Action<TPayload> action, Predicate<TPayload> filter) => Subscribe(action, SubscriptionOption.Synchronous, false, filter);
+    public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption) => Subscribe(action, threadOption, false);
+    public SubscriptionToken Subscribe(Action<TPayload> action, bool keepSubscriberReferenceAlive) => Subscribe(action, SubscriptionOption.Synchronous, keepSubscriberReferenceAlive);
+    public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption, bool keepSubscriberReferenceAlive) => Subscribe(action, threadOption, keepSubscriberReferenceAlive, null);
+    public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption, bool keepSubscriberReferenceAlive, Predicate<TPayload>? filter)
     {
         var actionReference = new DelegateReference(action, keepSubscriberReferenceAlive);
         var filterReference = filter is null ? null : new DelegateReference(filter, keepSubscriberReferenceAlive);
         var token = new SubscriptionToken(Unsubscribe);
         var subscription = threadOption switch
         {
-            ThreadOption.BackgroundThread => new BackgroundEventSubscription<TPayload>(actionReference, filterReference, token),
-            ThreadOption.UIThread when SynchronizationContext is not null => new DispatcherEventSubscription<TPayload>(actionReference, filterReference, token, SynchronizationContext),
+            SubscriptionOption.Asynchronous => new BackgroundEventSubscription<TPayload>(actionReference, filterReference, token),
+            SubscriptionOption.UI when SynchronizationContext is not null => new DispatcherEventSubscription<TPayload>(actionReference, filterReference, token, SynchronizationContext),
             _ => new EventSubscription<TPayload>(actionReference, filterReference, token)
         };
         lock (Subscriptions)
@@ -134,7 +134,7 @@ public class PubSubEvent<TPayload>
             var returnList = new List<Action<TPayload>>(Subscriptions.Count);
             for (var i = Subscriptions.Count - 1; i >= 0; i--)
             {
-                var listItem = Subscriptions[i].GetExecutionStrategyWithPayload();
+                var listItem = Subscriptions[i].GetExecutionStrategy();
                 if (listItem is null)
                 {
                     Subscriptions.RemoveAt(i);

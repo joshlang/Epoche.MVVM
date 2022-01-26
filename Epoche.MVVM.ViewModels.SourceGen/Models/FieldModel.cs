@@ -5,6 +5,8 @@ class FieldModel
     public string FieldName = default!;
     public string PropertyName = default!;
     public string FullTypeName = default!;
+    public bool IsReadOnly;
+    public bool PrivateSetter;
     public bool GenerateProperty;
     public string? OnChange;
     public string? EqualityComparer;

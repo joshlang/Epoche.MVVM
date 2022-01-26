@@ -22,11 +22,8 @@ partial class {model.ClassName}
     {{
         {string.Concat(model.Injections.Select(AssignInjection))}
         {string.Concat(model.Methods.Select(MethodModelWriter.CreateCommand))}
-        OnInitialize();
     }}
     
-    partial void OnInitialize();
-
     {string.Concat(model.Injections.Select(InjectionProperty))}
 
     {string.Concat(model.Fields.Select(FieldModelWriter.Property))}

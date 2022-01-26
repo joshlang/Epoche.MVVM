@@ -4,7 +4,9 @@ public interface INavigator
 {
     NavigationStackChangedEvent NavigationStackChangedEvent { get; }
 
+    void NavigateTo<TViewModel>() where TViewModel : NavigableViewModelBase;
     void NavigateTo<TViewModel>(NavigationType navigationType) where TViewModel : NavigableViewModelBase;
+    void NavigateTo(Type navigationTarget);
     void NavigateTo(NavigationType navigationType, Type navigationTarget);
 
     bool CanGoBack();

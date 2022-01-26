@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Epoche.Shared" Version="1.0.4" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Epoche.MVVM.Models\Epoche.MVVM.Models.csproj" />
+    <ProjectReference Include="..\Epoche.MVVM.ViewModels.Navigation\Epoche.MVVM.ViewModels.Navigation.csproj" />
   </ItemGroup>
 
 </Project>

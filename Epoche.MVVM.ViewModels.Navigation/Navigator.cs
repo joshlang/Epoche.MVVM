@@ -69,6 +69,9 @@ sealed class Navigator : INavigator
         return true;
     }
 
+    public void NavigateTo<TViewModel>() where TViewModel : NavigableViewModelBase => NavigateTo<TViewModel>(NavigationType.PushState);
+    public void NavigateTo(Type type) => NavigateTo(NavigationType.PushState, type);
+
     public void NavigateTo<TViewModel>(NavigationType navigationType) where TViewModel : NavigableViewModelBase =>
         NavigateTo(navigationType: navigationType, navigationTarget: typeof(TViewModel));
 
@@ -114,7 +117,7 @@ sealed class Navigator : INavigator
         int index;
         for (index = 0; index < oldNavStack.Length; ++index)
         {
-            if (index >= newNavStack.Length || !object.ReferenceEquals(oldNavStack[index], newNavStack[index]))
+            if (index >= newNavStack.Length || !ReferenceEquals(oldNavStack[index], newNavStack[index]))
             {
                 break;
             }

@@ -10,8 +10,9 @@ static class FieldBuilder
             ViewModel = viewModel,
             FieldName = field.Name,
             PropertyName = field.Name.ToPascalCase(),
-            FullTypeName = field.Type.FullTypeName()
-        };
+            FullTypeName = field.Type.FullTypeName(),
+            IsReadOnly = field.IsReadOnly
+        };        
         if (field.Type.IsReferenceType && field.Type.NullableAnnotation == NullableAnnotation.Annotated)
         {
             model.FullTypeName += "?";
@@ -39,6 +40,9 @@ static class FieldBuilder
                             break;
                         case "TrackChanges":
                             model.TrackChanges = (bool?)named.Value.Value ?? false;
+                            break;
+                        case "PrivateSetter":
+                            model.PrivateSetter = (bool?)named.Value.Value ?? false;
                             break;
                     }
                 }

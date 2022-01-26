@@ -2,7 +2,7 @@ namespace Epoche.MVVM.ViewModels.Events;
 
 class EventSubscription
 {
-    protected readonly DelegateReference ActionReference;
+    readonly DelegateReference ActionReference;
 
     public EventSubscription(DelegateReference actionReference, SubscriptionToken subscriptionToken)
     {
@@ -10,12 +10,10 @@ class EventSubscription
         SubscriptionToken = subscriptionToken ?? throw new ArgumentNullException(nameof(subscriptionToken));
     }
 
-    public Action? Action => (Action?)ActionReference.Target;
+    internal Action? Action => (Action?)ActionReference.Target;
     public SubscriptionToken SubscriptionToken { get; set; }
 
-    public Action? GetExecutionStrategy() => Action;
-
-    public virtual void InvokeAction(Action action) => action?.Invoke();
+    public virtual Action? GetExecutionStrategy() => Action;
 }
 
 class EventSubscription<TPayload>
@@ -29,10 +27,10 @@ class EventSubscription<TPayload>
         SubscriptionToken = subscriptionToken ?? throw new ArgumentNullException(nameof(subscriptionToken));
     }
 
-    public Action<TPayload>? Action => (Action<TPayload>?)ActionReference.Target;
+    internal Action<TPayload>? Action => (Action<TPayload>?)ActionReference.Target;
     public SubscriptionToken SubscriptionToken { get; set; }
 
-    public Action<TPayload>? GetExecutionStrategyWithPayload()
+    public virtual Action<TPayload>? GetExecutionStrategy()
     {
         var action = Action;
         if (action is null) { return null; }
@@ -44,6 +42,4 @@ class EventSubscription<TPayload>
             action(x);
         };
     }
-
-    public virtual void InvokeAction(Action<TPayload> action, TPayload argument) => action?.Invoke(argument);
 }

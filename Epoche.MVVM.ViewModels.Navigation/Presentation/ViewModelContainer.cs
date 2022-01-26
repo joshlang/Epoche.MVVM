@@ -8,11 +8,11 @@ abstract class ViewModelContainer : INotifyPropertyChanged, IDisposable
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected ViewModelBase? CurrentViewModel { get; private set; }
+    protected NavigableViewModelBase? CurrentViewModel { get; private set; }
 
-    public void SetViewModel(ViewModelBase? viewModel)
+    public void SetViewModel(NavigableViewModelBase? viewModel)
     {
-        if (object.ReferenceEquals(viewModel, CurrentViewModel))
+        if (ReferenceEquals(viewModel, CurrentViewModel))
         {
             return;
         }

@@ -1,6 +1,6 @@
 namespace Epoche.MVVM.ViewModels.Events;
 
-public class EventAggregator : IEventAggregator
+class EventAggregator : IEventAggregator
 {
     readonly Dictionary<Type, PubSubEvent> PubSubEventsByType = new();
     readonly Dictionary<Type, object> GenericPubSubEventsByType = new();
