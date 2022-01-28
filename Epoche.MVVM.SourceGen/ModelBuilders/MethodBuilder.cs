@@ -3,11 +3,11 @@
 namespace Epoche.MVVM.SourceGen.ModelBuilders;
 static class MethodBuilder
 {
-    public static MethodModel Create(ModelClassModel viewModel, IMethodSymbol method)
+    public static MethodModel Create(ModelClassModel classModel, IMethodSymbol method)
     {
         var model = new MethodModel
         {
-            ViewModel = viewModel,
+            ClassModel = classModel,
             MethodName = method.Name,
             CommandName = $"{method.Name}Command",
             CanExecuteName = $"Can{method.Name}",

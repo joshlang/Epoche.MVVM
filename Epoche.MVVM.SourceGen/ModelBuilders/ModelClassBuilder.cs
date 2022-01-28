@@ -37,7 +37,7 @@ static class ModelClassBuilder
         {
             switch (a.AttributeClass?.FullTypeName())
             {
-                case "Epoche.MVVM.ViewModels.InjectAttribute":
+                case "Epoche.MVVM.Models.InjectAttribute":
                     var inject = new InjectModel();
                     var type = a.ConstructorArguments[0].Value as ITypeSymbol;
                     inject.FullTypeName = type!.FullTypeName();

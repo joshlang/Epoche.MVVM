@@ -3,15 +3,16 @@
 namespace Epoche.MVVM.SourceGen.ModelBuilders;
 static class FieldBuilder
 {
-    public static FieldModel Create(ModelClassModel viewModel, IFieldSymbol field)
+    public static FieldModel Create(ModelClassModel classModel, IFieldSymbol field)
     {
         var model = new FieldModel
         {
-            ViewModel = viewModel,
+            ClassModel = classModel,
             FieldName = field.Name,
             PropertyName = field.Name.ToPascalCase(),
             FullTypeName = field.Type.FullTypeName(),
-            IsReadOnly = field.IsReadOnly
+            IsReadOnly = field.IsReadOnly,
+            TrackChanges = !classModel.IsViewModel
         };        
         if (field.Type.IsReferenceType && field.Type.NullableAnnotation == NullableAnnotation.Annotated)
         {

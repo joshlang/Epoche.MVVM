@@ -37,3 +37,15 @@ public sealed class WithFactoryAttribute : Attribute
     {
     }
 }
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public sealed class InjectAttribute : Attribute
+{
+    public Type Type { get; }
+    public string? Name { get; set; }
+    public string? AccessModifier { get; set; }
+    public InjectAttribute(Type type)
+    {
+        Type = type;
+    }
+}

@@ -1,7 +1,7 @@
 ﻿namespace Epoche.MVVM.SourceGen.Models;
 class MethodModel
 {
-    public ModelClassModel ViewModel = default!;
+    public ModelClassModel ClassModel = default!;
     public string MethodName = default!;
     public string CommandName = default!;
     public string? CanExecuteName;

@@ -3,11 +3,11 @@
 namespace Epoche.MVVM.SourceGen.ModelBuilders;
 static class PropertyBuilder
 {
-    public static PropertyModel Create(ModelClassModel viewModel, IPropertySymbol property)
+    public static PropertyModel Create(ModelClassModel classModel, IPropertySymbol property)
     {
         var model = new PropertyModel
         {
-            ViewModel = viewModel,
+            ClassModel = classModel,
             PropertyName = property.Name
         };
         foreach (var a in property.GetAttributes())

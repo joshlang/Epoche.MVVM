@@ -1,7 +1,7 @@
 ﻿namespace Epoche.MVVM.SourceGen.Models;
 class FieldModel
 {
-    public ModelClassModel ViewModel = default!;
+    public ModelClassModel ClassModel = default!;
     public string FieldName = default!;
     public string PropertyName = default!;
     public string FullTypeName = default!;
