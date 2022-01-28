@@ -22,6 +22,8 @@ namespace {model.Namespace};
 partial class {model.ClassName}
 {{
     {Constructor(model)}
+
+    partial void Init();
     
     {string.Concat(model.Injections.Select(InjectionProperty))}
 
@@ -43,6 +45,7 @@ partial class {model.ClassName}
         {string.Concat(model.Injections.Select(x => AssignInjection(model, x)))}
         {string.Concat(model.Methods.Select(MethodModelWriter.CreateCommand))}
         {string.Concat(model.Fields.Select(x => FieldFactoryInitializer(model, x)))}
+        this.Init();
     }}
 ";
 

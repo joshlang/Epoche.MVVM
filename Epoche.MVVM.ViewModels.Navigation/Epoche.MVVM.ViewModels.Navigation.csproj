@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Epoche.MVVM.Events\Epoche.MVVM.Events.csproj" />
     <ProjectReference Include="..\Epoche.MVVM.ViewModels\Epoche.MVVM.ViewModels.csproj" />
   </ItemGroup>
 

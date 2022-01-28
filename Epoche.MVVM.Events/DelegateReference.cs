@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Epoche.MVVM.ViewModels.Events;
+namespace Epoche.MVVM.Events;
 
 class DelegateReference
 {

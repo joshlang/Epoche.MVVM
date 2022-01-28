@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Epoche.MVVM.ViewModels.Events;
+using Epoche.MVVM.Events;
 
 namespace Epoche.MVVM.ViewModels.Navigation;
 

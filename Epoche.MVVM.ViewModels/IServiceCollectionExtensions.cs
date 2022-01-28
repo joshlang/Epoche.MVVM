@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Epoche.MVVM.ViewModels.Events;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Epoche.MVVM.ViewModels;
@@ -15,6 +14,4 @@ public static class IServiceCollectionExtensions
 
         return services;
     }
-
-    public static IServiceCollection AddEventAggregator(this IServiceCollection services) => services.AddSingleton<IEventAggregator, EventAggregator>();
 }

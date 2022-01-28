@@ -1,4 +1,4 @@
-namespace Epoche.MVVM.ViewModels.Events;
+namespace Epoche.MVVM.Events;
 
 // The Prism project was the starting point for all this
 public interface IEventAggregator

@@ -1,4 +1,4 @@
-namespace Epoche.MVVM.ViewModels.Events;
+namespace Epoche.MVVM.Events;
 
 public class SubscriptionToken : IEquatable<SubscriptionToken>, IDisposable
 {
