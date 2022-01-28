@@ -33,11 +33,16 @@ partial class {model.ClassName}
 }}
 ";
 
+    static string FieldFactoryInitializer(ModelClassModel model, FieldModel fieldModel) =>
+        string.IsNullOrEmpty(fieldModel.FactoryInitializerFullTypeName) ? "" : $@"
+        this.{fieldModel.FieldName} = {model.Injections.First(x => x.FullTypeName == fieldModel.FactoryInitializerFullTypeName).PropertyName.ToCamelCase()}.Create();";
+
     static string Constructor(ModelClassModel model) => $@"
     public {model.ClassName}({AllConstructorArgs(model)}){BaseArgs(model)}
     {{
         {string.Concat(model.Injections.Select(x => AssignInjection(model, x)))}
         {string.Concat(model.Methods.Select(MethodModelWriter.CreateCommand))}
+        {string.Concat(model.Fields.Select(x => FieldFactoryInitializer(model, x)))}
     }}
 ";
 

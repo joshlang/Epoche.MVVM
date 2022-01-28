@@ -79,6 +79,18 @@ static class ModelClassBuilder
                     break;
             }
         }
+        foreach (var field in model.Fields.Where(x => x.FactoryInitializer))
+        {
+            if (!model.Injections.Any(x => x.FullTypeName == field.FactoryInitializerFullTypeName))
+            {
+                model.Injections.Add(new InjectModel
+                {
+                    FullTypeName = field.FactoryInitializerFullTypeName!,
+                    PropertyName = field.FactoryInitializerFullTypeName!.Split('.').Last().WithoutInterface()
+                });
+            }
+        }
+        
         var constructor = classSymbol
             .BaseType?
             .Constructors

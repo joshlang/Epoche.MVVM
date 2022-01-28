@@ -24,6 +24,16 @@ public abstract partial class ModelBase
             Properties = properties;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Field)]
+    protected sealed class FactoryInitializeAttribute : Attribute
+    {
+        public Type? Type { get; set; }
+        public FactoryInitializeAttribute(Type? type = null)
+        {
+            Type = type;
+        }
+    }
 }
 
 [AttributeUsage(AttributeTargets.Class)]

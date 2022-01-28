@@ -9,6 +9,7 @@ static class FieldBuilder
         {
             ClassModel = classModel,
             FieldName = field.Name,
+            FieldSymbol = field,
             PropertyName = field.Name.ToPascalCase(),
             FullTypeName = field.Type.FullTypeName(),
             IsReadOnly = field.IsReadOnly,
@@ -47,6 +48,12 @@ static class FieldBuilder
                             break;
                     }
                 }
+            }
+            else if (attributeName == "Epoche.MVVM.Models.ModelBase.FactoryInitializeAttribute")
+            {
+                model.FactoryInitializer = true;
+                var typeSymbol = a.ConstructorArguments[0].Value as ITypeSymbol;
+                model.FactoryInitializerFullTypeName = typeSymbol?.FullTypeName() ?? $@"{field.Type.ContainingNamespace.ToDisplayString()}.I{field.Type.Name}Factory";
             }
         }
         return model;

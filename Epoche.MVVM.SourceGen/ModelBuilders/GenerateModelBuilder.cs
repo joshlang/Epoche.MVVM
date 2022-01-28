@@ -7,7 +7,8 @@ static class GenerateModelBuilder
     {
         var model = new GenerateModel
         {
-            ViewModelBaseSymbol = context.Compilation.GetTypeByMetadataName("Epoche.MVVM.ViewModels.ViewModelBase")
+            ViewModelBaseSymbol = context.Compilation.GetTypeByMetadataName("Epoche.MVVM.ViewModels.ViewModelBase"),
+            Context = context
         };
 
         var modelBase = context.Compilation.GetTypeByMetadataName("Epoche.MVVM.Models.ModelBase");

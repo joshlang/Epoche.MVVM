@@ -2,9 +2,12 @@
 class FieldModel
 {
     public ModelClassModel ClassModel = default!;
+    public IFieldSymbol FieldSymbol = default!;
     public string FieldName = default!;
     public string PropertyName = default!;
     public string FullTypeName = default!;
+    public bool FactoryInitializer;
+    public string? FactoryInitializerFullTypeName;
     public bool IsReadOnly;
     public bool PrivateSetter;
     public bool GenerateProperty;
