@@ -2,7 +2,7 @@
 
 namespace Epoche.MVVM.Models;
 
-public abstract class ModelBase : INotifyPropertyChanged, IRevertibleChangeTracking
+public abstract partial class ModelBase : INotifyPropertyChanged, IRevertibleChangeTracking
 {
     static readonly PropertyChangedEventArgs IsChangedPropertyChangedEventArgs = new(nameof(IsChanged));
 
