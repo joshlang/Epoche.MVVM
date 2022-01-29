@@ -15,6 +15,7 @@ public class ServiceResult
     public bool Ok => Error is null;
 
     public override string ToString() => Error?.ToString() ?? "Ok";
+    public static implicit operator ServiceResult(Exception e) => new(e);
 }
 
 public class ServiceResult<T> : ServiceResult where T : class
@@ -33,4 +34,6 @@ public class ServiceResult<T> : ServiceResult where T : class
 
     public T? NullableResult { get; }
     public T Result => Ok ? NullableResult! : throw new InvalidOperationException($"Result cannot be accessed because the service result is in an error state ({Error})");
+    public static implicit operator ServiceResult<T>(Exception e) => new(new ServiceError(e));
+    public static implicit operator ServiceResult<T>(T result) => new(result);
 }

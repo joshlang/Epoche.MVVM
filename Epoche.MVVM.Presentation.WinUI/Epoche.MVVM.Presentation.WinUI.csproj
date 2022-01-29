@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="Epoche.Shared" Version="1.0.4" />
+      <PackageReference Include="Epoche.Shared" Version="1.0.5" />
       <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.6" />
       <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.6" />
       <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.6" />

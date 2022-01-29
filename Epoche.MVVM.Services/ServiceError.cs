@@ -18,4 +18,6 @@ public class ServiceError
     public Exception? Exception { get; }
 
     public override string ToString() => Exception is null ? Message : $"{Exception.GetType().Name}: {Message}";
+
+    public static implicit operator ServiceError(Exception e) => new(e);
 }
