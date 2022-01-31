@@ -10,6 +10,8 @@ static class SourceOutput
     public static void Write(SourceProductionContext context, (Compilation Left, ImmutableArray<ClassDeclarationSyntax?> Right) action)
     {
         context.CancellationToken.ThrowIfCancellationRequested();
+        if (action.Right.IsDefaultOrEmpty) { return; }
+
         var model = new OutputModel
         {
             Context = context,

@@ -10,6 +10,12 @@ static class Diagnostics
         public static DiagnosticDescriptor InjectMissingType = Create("GEN003", "[Inject] is missing a Type");
         public static DiagnosticDescriptor NotViewModel = Create("GEN004", "Class must be derived from ViewModelBase to use this attribute");
         public static DiagnosticDescriptor MultipleCommandParameters = Create("GEN005", "A [Command] method cannot have multiple parameters");
+        public static DiagnosticDescriptor InjectMissingUseSourceGen = Create("GEN006", "[Inject] requires the class to be decorated with [UseSourceGen]");
+        public static DiagnosticDescriptor WithFactoryMissingUseSourceGen = Create("GEN007", "[WithFactory] requires the class to be decorated with [UseSourceGen]");
+        public static DiagnosticDescriptor PropertyMissingUseSourceGen = Create("GEN008", "[Property] requires the class to be decorated with [UseSourceGen]");
+        public static DiagnosticDescriptor ChangedByMissingUseSourceGen = Create("GEN009", "[ChangedBy] requires the class to be decorated with [UseSourceGen]");
+        public static DiagnosticDescriptor CommandMissingUseSourceGen = Create("GEN010", "[Command] requires the class to be decorated with [UseSourceGen]");
+        public static DiagnosticDescriptor FactoryInitializeMissingUseSourceGen = Create("GEN011", "[FactoryInitialize] requires the class to be decorated with [UseSourceGen]");
     }
     public static class Warnings
     {
