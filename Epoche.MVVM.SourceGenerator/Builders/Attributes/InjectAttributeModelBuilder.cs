@@ -11,7 +11,7 @@ static class InjectAttributeModelBuilder
             AttributeData = attributeData
         };
 
-        if (attributeData.ConstructorArguments.Length > 0)
+        if (!attributeData.ConstructorArguments.IsDefaultOrEmpty)
         {
             model.Type = (attributeData.ConstructorArguments[0].Value as ITypeSymbol)?.ToDisplayString()!;
         }

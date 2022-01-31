@@ -20,6 +20,8 @@ static class ClassModelBuilder
 
         model.Namespace = classSymbol.ContainingNamespace.ToDisplayString();
         model.ClassName = classSymbol.Name.ToString();
+        model.IsMVVMModel = outputModel.ModelBaseSymbol is not null && classSymbol.IsClassDerivedFrom(outputModel.ModelBaseSymbol);
+        model.IsMVVMViewModel = model.IsMVVMModel && outputModel.ViewModelBaseSymbol is not null && classSymbol.IsClassDerivedFrom(outputModel.ViewModelBaseSymbol);
 
         foreach (var attributeData in classSymbol.GetAttributes())
         {
@@ -58,6 +60,22 @@ static class ClassModelBuilder
                     break;
             }
         }
+
+        var constructor = classSymbol
+            .BaseType?
+            .Constructors
+            .AsEnumerable()
+            .Where(x => !x.IsStatic)
+            .OrderByDescending(x => x.Parameters.Length)
+            .FirstOrDefault();
+        if (constructor is not null)
+        {
+            foreach (var p in constructor.Parameters)
+            {
+                model.BaseConstructorArgs.Add((p.Type.ToDisplayString(), p.Name));
+            }
+        }
+
 
         outputModel.Classes.Add(model);
     }

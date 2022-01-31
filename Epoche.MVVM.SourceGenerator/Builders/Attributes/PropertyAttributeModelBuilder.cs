@@ -11,7 +11,7 @@ static class PropertyAttributeModelBuilder
             AttributeData = attributeData
         };
 
-        if (attributeData.ConstructorArguments.Length > 0)
+        if (!attributeData.ConstructorArguments.IsDefaultOrEmpty)
         {
             model.Name = attributeData.ConstructorArguments[0].Value as string;
         }
@@ -25,8 +25,8 @@ static class PropertyAttributeModelBuilder
                 case "TrackChanges":
                     model.TrackChanges = (bool?)named.Value.Value ?? model.TrackChanges;
                     break;
-                case "PrivateSetter":
-                    model.PrivateSetter = (bool?)named.Value.Value ?? model.PrivateSetter;
+                case "SetterModifier":
+                    model.SetterModifier = named.Value.Value as string;
                     break;
                 case "OnChange":
                     model.OnChange = named.Value.Value as string;

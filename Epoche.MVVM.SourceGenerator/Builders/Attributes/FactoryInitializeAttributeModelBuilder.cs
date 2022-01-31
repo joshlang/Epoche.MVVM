@@ -11,20 +11,20 @@ static class FactoryInitializeAttributeModelBuilder
             AttributeData = attributeData
         };
 
-        if (attributeData.ConstructorArguments.Length > 0)
+        if (!attributeData.ConstructorArguments.IsDefaultOrEmpty)
         {
-            model.Type = (attributeData.ConstructorArguments[0].Value as ITypeSymbol)?.ToDisplayString();
+            model.Type = (attributeData.ConstructorArguments[0].Value as ITypeSymbol)?.ToDisplayString()!;
         }
         foreach (var named in attributeData.NamedArguments)
         {
             switch (named.Key)
             {
                 case "Type":
-                    model.Type = (named.Value.Value as ITypeSymbol)?.ToDisplayString();
+                    model.Type = (named.Value.Value as ITypeSymbol)?.ToDisplayString()!;
                     break;
             }
         }
 
-        fieldModel.FactoryInitializeAttribute= model;
+        fieldModel.FactoryInitializeAttribute = model;
     }
 }

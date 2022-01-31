@@ -7,4 +7,6 @@ class WithFactoryAttributeModel
     public string? FactoryName;
     public string? InterfaceAccessModifier;
     public string? FactoryAccessModifier;
+    public bool UseInterfaceNameDefault = true;
+    public bool UseFactoryNameDefault = true;
 }

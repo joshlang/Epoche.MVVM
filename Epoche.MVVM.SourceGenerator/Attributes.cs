@@ -3,6 +3,7 @@
 static class Attributes
 {
     public const string Text = @"
+#nullable enable
 using System;
 namespace Epoche.MVVM.SourceGenerator;
 
@@ -19,7 +20,7 @@ sealed class PropertyAttribute : Attribute
     public string? OnChange { get; set; }
     public string? EqualityComparer { get; set; }
     public bool TrackChanges { get; set; } = true;
-    public bool PrivateSetter { get; set; }
+    public string? SetterModifier { get; set; }
     public PropertyAttribute(string? name = null)
     {
         Name = name;

@@ -11,7 +11,7 @@ static class ChangedByAttributeModelBuilder
             AttributeData = attributeData
         };
         
-        if (attributeData.ConstructorArguments.Length > 0)
+        if (!attributeData.ConstructorArguments.IsDefaultOrEmpty)
         {
             model.Properties = attributeData.ConstructorArguments[0].Values.Select(x => x.Value as string).Where(x => x is not null).ToArray()!;
         }

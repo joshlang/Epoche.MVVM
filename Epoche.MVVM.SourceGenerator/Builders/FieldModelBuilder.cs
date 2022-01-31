@@ -10,7 +10,11 @@ static class FieldModelBuilder
 
         var model = new FieldModel
         {
-            FieldName = symbol.Name
+            FieldName = symbol.Name,
+            FullTypeName = symbol.Type.ToDisplayString(),
+            IsReadOnly = symbol.IsReadOnly,
+            TypeName = symbol.Type.Name,
+            TypeNamespace = symbol.Type.ContainingNamespace?.ToDisplayString()
         };
         
         foreach (var attributeData in symbol.GetAttributes())
@@ -30,8 +34,6 @@ static class FieldModelBuilder
         {
             return;
         }
-
-
 
         classModel.FieldModels.Add(model);
     }

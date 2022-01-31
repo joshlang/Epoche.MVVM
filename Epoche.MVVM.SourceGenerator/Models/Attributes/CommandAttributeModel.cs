@@ -7,4 +7,5 @@ class CommandAttributeModel
     public bool AllowConcurrency;
     public string? CanExecute;
     public string? TaskName;
+    public bool UseDefaultTaskName = true;
 }

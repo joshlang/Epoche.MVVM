@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using Epoche.MVVM.SourceGenerator.Builders;
 using Epoche.MVVM.SourceGenerator.Models;
+using Epoche.MVVM.SourceGenerator.Plans;
+using Epoche.MVVM.SourceGenerator.Writers;
 
 namespace Epoche.MVVM.SourceGenerator;
 static class SourceOutput
@@ -37,5 +39,7 @@ static class SourceOutput
         {
             ClassModelBuilder.Build(model, syntax!);
         }
+        var plan = OutputPlan.Create(model);
+        OutputPlanWriter.Write(plan);
     }
 }

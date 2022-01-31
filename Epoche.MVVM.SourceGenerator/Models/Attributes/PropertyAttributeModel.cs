@@ -4,7 +4,7 @@ class PropertyAttributeModel
     public AttributeData AttributeData = default!;
 
     public bool TrackChanges = true;
-    public bool PrivateSetter;
+    public string? SetterModifier;
     public string? Name;
     public string? OnChange;
     public string? EqualityComparer;

@@ -17,7 +17,7 @@ static class MethodModelBuilder
         {
             if (SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, outputModel.CommandAttributeSymbol))
             {
-                CommandAttributeModelBuilder.Build(outputModel, model, attributeData);
+                CommandAttributeModelBuilder.Build(outputModel, classModel, model, attributeData);
             }
         }
 
@@ -25,7 +25,22 @@ static class MethodModelBuilder
         {
             return;
         }
+        if (!symbol.Parameters.IsDefaultOrEmpty && symbol.Parameters.Length > 1)
+        {
+            outputModel.Context.Report(Diagnostics.Errors.MultipleCommandParameters, symbol);
+            return;
+        }
 
+        model.IsAsync = symbol.ReturnType.ToDisplayString().StartsWith("System.Threading.Tasks.Task");
+        if (model.IsAsync && symbol.ReturnType is INamedTypeSymbol { TypeArguments.IsDefaultOrEmpty: false } returnSymbol)
+        {
+            model.AsyncReturnType = returnSymbol.TypeArguments[0].ToDisplayString();
+        }
+        if (!symbol.Parameters.IsDefaultOrEmpty)
+        {
+            model.CommandParameterType = symbol.Parameters[0].Type.ToDisplayString();
+        }
+        
         classModel.MethodModels.Add(model);
     }
 }

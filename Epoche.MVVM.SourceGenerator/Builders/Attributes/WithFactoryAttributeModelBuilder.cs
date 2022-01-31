@@ -17,9 +17,11 @@ static class WithFactoryAttributeModelBuilder
             {
                 case "InterfaceName":
                     model.InterfaceName = named.Value.Value as string;
+                    model.UseInterfaceNameDefault = false;
                     break;
                 case "FactoryName":
                     model.FactoryName = named.Value.Value as string;
+                    model.UseFactoryNameDefault = false;
                     break;
                 case "InterfaceAccessModifier":
                     model.InterfaceAccessModifier = named.Value.Value as string;
@@ -28,6 +30,15 @@ static class WithFactoryAttributeModelBuilder
                     model.FactoryAccessModifier = named.Value.Value as string;
                     break;
             }
+        }
+
+        if (!model.UseFactoryNameDefault && 
+            !model.UseInterfaceNameDefault &&
+            string.IsNullOrEmpty(model.InterfaceName) &&
+            string.IsNullOrEmpty(model.FactoryName))
+        {
+            outputModel.Context.Report(Diagnostics.Warnings.NoFactoryInfo, attributeData.AttributeConstructor);
+            return;
         }
 
         classModel.WithFactoryAttribute = model;

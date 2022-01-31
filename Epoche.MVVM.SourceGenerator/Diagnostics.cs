@@ -8,8 +8,13 @@ static class Diagnostics
         public static DiagnosticDescriptor NotPartial = Create("GEN001", "Classes decorated with [UseSourceGen] must be declared with the 'partial' modifier");
         public static DiagnosticDescriptor SubClass = Create("GEN002", "Nested types are not supported");
         public static DiagnosticDescriptor InjectMissingType = Create("GEN003", "[Inject] is missing a Type");
+        public static DiagnosticDescriptor NotViewModel = Create("GEN004", "Class must be derived from ViewModelBase to use this attribute");
+        public static DiagnosticDescriptor MultipleCommandParameters = Create("GEN005", "A [Command] method cannot have multiple parameters");
     }
     public static class Warnings
     {
+        static DiagnosticDescriptor Create(string id, string text) => new DiagnosticDescriptor(id, text, text, "SourceGeneration", DiagnosticSeverity.Warning, true);
+
+        public static DiagnosticDescriptor NoFactoryInfo = Create("WGEN001", "[WithFactory] has no effect when both interface and factory names are missing");
     }
 }
