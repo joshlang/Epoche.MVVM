@@ -28,7 +28,7 @@ sealed class Navigator : INavigator
         Presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
         ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
-        NavigationStackChangedEvent = eventAggregator.GetEvent<NavigationStackChangedEvent>();
+        NavigationStackChangedEvent = eventAggregator.GetActionEvent<NavigationStackChangedEvent>();
     }
 
     public NavigationStackChangedEvent NavigationStackChangedEvent { get; }

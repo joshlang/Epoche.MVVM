@@ -6,7 +6,7 @@ class EventAggregator : IEventAggregator
     readonly Dictionary<Type, object> GenericPubSubEventsByType = new();
     readonly SynchronizationContext? Context = SynchronizationContext.Current;
 
-    public TEvent GetEvent<TEvent>() where TEvent : PubSubEvent, new()
+    public TEvent GetActionEvent<TEvent>() where TEvent : PubSubEvent, new()
     {
         lock (PubSubEventsByType)
         {
@@ -15,7 +15,7 @@ class EventAggregator : IEventAggregator
                 PubSubEventsByType[typeof(TEvent)] = new TEvent { SynchronizationContext = Context });
         }
     }
-    public TEvent GetEvent<TEvent, T>() where TEvent : PubSubEvent<T>, new()
+    public TEvent GetDataEvent<TEvent>() where TEvent : PubSubEventGenericBase, new()
     {
         lock (GenericPubSubEventsByType)
         {

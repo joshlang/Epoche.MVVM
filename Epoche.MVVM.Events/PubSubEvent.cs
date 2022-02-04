@@ -73,10 +73,14 @@ public class PubSubEvent
     }
 }
 
-public class PubSubEvent<TPayload>
+public abstract class PubSubEventGenericBase
+{
+    internal PubSubEventGenericBase() { }
+    public SynchronizationContext? SynchronizationContext { get; internal set; }
+}
+public class PubSubEvent<TPayload> : PubSubEventGenericBase
 {
     readonly List<EventSubscription<TPayload>> Subscriptions = new();
-    public SynchronizationContext? SynchronizationContext { get; internal set; }
 
     public SubscriptionToken Subscribe(Action<TPayload> action) => Subscribe(action, SubscriptionOption.Synchronous);
     public SubscriptionToken Subscribe(Action<TPayload> action, Predicate<TPayload> filter) => Subscribe(action, SubscriptionOption.Synchronous, false, filter);
