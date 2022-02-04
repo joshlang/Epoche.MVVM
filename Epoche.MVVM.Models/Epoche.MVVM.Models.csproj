@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Epoche.Shared" Version="1.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

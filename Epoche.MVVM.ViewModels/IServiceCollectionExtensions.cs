@@ -7,9 +7,9 @@ public static class IServiceCollectionExtensions
 {
     public static IServiceCollection AddViewModelsInAssembly(this IServiceCollection services, Assembly assembly)
     {
-        foreach (var type in ViewModelHelpers.GetViewModelTypes(assembly))
+        foreach (var viewModelType in ViewModelHelpers.GetViewModelTypes(assembly))
         {
-            services.AddTransient(type);
+            services.AddTransient(viewModelType);
         }
 
         return services;
