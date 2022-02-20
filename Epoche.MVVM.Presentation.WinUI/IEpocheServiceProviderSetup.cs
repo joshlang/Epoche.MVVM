@@ -1,5 +1,5 @@
 ﻿namespace Epoche.MVVM.Presentation.WinUI;
-public interface IEpochePageBaseSetup
+public interface IEpocheServiceProviderSetup
 {
     void SetServiceProvider(IServiceProvider serviceProvider);
 }
