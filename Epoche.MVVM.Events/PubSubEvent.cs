@@ -82,10 +82,10 @@ public class PubSubEvent<TPayload> : PubSubEventGenericBase
 {
     readonly List<EventSubscription<TPayload>> Subscriptions = new();
 
-    public SubscriptionToken Subscribe(Action<TPayload> action) => Subscribe(action, SubscriptionOption.Synchronous);
-    public SubscriptionToken Subscribe(Action<TPayload> action, Predicate<TPayload> filter) => Subscribe(action, SubscriptionOption.Synchronous, false, filter);
+    public SubscriptionToken Subscribe(Action<TPayload> action) => Subscribe(action, SubscriptionOption.UI);
+    public SubscriptionToken Subscribe(Action<TPayload> action, Predicate<TPayload> filter) => Subscribe(action, SubscriptionOption.UI, false, filter);
     public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption) => Subscribe(action, threadOption, false);
-    public SubscriptionToken Subscribe(Action<TPayload> action, bool keepSubscriberReferenceAlive) => Subscribe(action, SubscriptionOption.Synchronous, keepSubscriberReferenceAlive);
+    public SubscriptionToken Subscribe(Action<TPayload> action, bool keepSubscriberReferenceAlive) => Subscribe(action, SubscriptionOption.UI, keepSubscriberReferenceAlive);
     public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption, bool keepSubscriberReferenceAlive) => Subscribe(action, threadOption, keepSubscriberReferenceAlive, null);
     public SubscriptionToken Subscribe(Action<TPayload> action, SubscriptionOption threadOption, bool keepSubscriberReferenceAlive, Predicate<TPayload>? filter)
     {
