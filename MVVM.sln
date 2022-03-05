@@ -21,6 +21,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoche.MVVM.Presentation.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoche.MVVM.Presentation.WinUI", "Epoche.MVVM.Presentation.WinUI\Epoche.MVVM.Presentation.WinUI.csproj", "{EE23DAFA-2907-4AC5-9EBB-C9ABB21FA398}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{53D08EE9-811F-48AB-BC5D-12FC6E9209DA}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
