@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="Epoche.Shared" Version="1.0.15" />
+      <PackageReference Include="Epoche.Shared" Version="1.0.20" />
 	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
   </ItemGroup>
 
