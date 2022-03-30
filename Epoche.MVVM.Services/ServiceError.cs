@@ -8,10 +8,19 @@ public class ServiceError
     public ServiceError(Exception exception) : this(exception.Message ?? exception.GetType().Name)
     {
         Exception = exception;
+        if (exception is EpocheServiceException ese)
+        {
+            Exception = ese.Error.Exception;
+            Message = ese.Error.Message;
+        }
     }
     public ServiceError(Exception exception, string message) : this(message)
     {
         Exception = exception;
+        if (exception is EpocheServiceException ese)
+        {
+            Exception = ese.Error.Exception;
+        }
     }
 
     public string Message { get; }
@@ -19,5 +28,5 @@ public class ServiceError
 
     public override string ToString() => Exception is null ? Message : $"{Exception.GetType().Name}: {Message}";
 
-    public static implicit operator ServiceError(Exception e) => new(e);
+    public static implicit operator ServiceError(Exception e) => e is EpocheServiceException ese ? ese.Error : new(e);
 }
