@@ -27,4 +27,22 @@ public static class ServiceResultExtensions
         }
         return result.NullableResult;
     }
+    public static async Task<T> ThrowOnError<T>(this Task<ServiceValueResult<T>> serviceTask) where T : struct
+    {
+        var result = await serviceTask.ConfigureAwait(false);
+        if (result.Error is not null)
+        {
+            throw new EpocheServiceException(result.Error);
+        }
+        return result.Result;
+    }
+    public static async Task<T?> ThrowOnErrorAllowingNull<T>(this Task<ServiceValueResult<T>> serviceTask) where T : struct
+    {
+        var result = await serviceTask.ConfigureAwait(false);
+        if (result.Error is not null)
+        {
+            throw new EpocheServiceException(result.Error);
+        }
+        return result.NullableResult;
+    }
 }

@@ -15,7 +15,7 @@
 		<PackageTags>MVVM</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/joshlang/Epoche.MVVM</PackageProjectUrl>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
