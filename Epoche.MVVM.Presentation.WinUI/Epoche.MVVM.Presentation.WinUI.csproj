@@ -18,7 +18,7 @@
 		<PackageTags>MVVM</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/joshlang/Epoche.MVVM</PackageProjectUrl>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -33,8 +33,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Epoche.Shared" Version="1.0.20" />
-		<PackageReference Include="Epoche.MVVM.ViewModels.Navigation" Version="1.0.1" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+		<PackageReference Include="Epoche.Shared" Version="1.0.26" />
+		<PackageReference Include="Epoche.MVVM.ViewModels.Navigation" Version="1.0.2" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.2" />
 	</ItemGroup>
 </Project>
