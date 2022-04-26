@@ -33,7 +33,9 @@ public class ServiceResult<T> : ServiceResult where T : class
     }
 
     public T? NullableResult { get; }
-    public T Result => Ok ? NullableResult! : throw new InvalidOperationException($"Result cannot be accessed because the service result is in an error state ({Error})");
+    public T Result => Ok
+        ? NullableResult ?? throw new InvalidOperationException($"No error was returned, but the result is null")
+        : throw new InvalidOperationException($"Result cannot be accessed because the service result is in an error state ({Error})");
     public static implicit operator ServiceResult<T>(Exception e) => new((ServiceError)e);
     public static implicit operator ServiceResult<T>(T result) => new(result);
 }
@@ -53,7 +55,9 @@ public class ServiceValueResult<T> : ServiceResult where T : struct
     }
 
     public T? NullableResult { get; }
-    public T Result => Ok ? NullableResult!.Value : throw new InvalidOperationException($"Result cannot be accessed because the service result is in an error state ({Error})");
+    public T Result => Ok
+        ? NullableResult ?? throw new InvalidOperationException($"No error was returned, but the result is null")
+        : throw new InvalidOperationException($"Result cannot be accessed because the service result is in an error state ({Error})");
     public static implicit operator ServiceValueResult<T>(Exception e) => new((ServiceError)e);
     public static implicit operator ServiceValueResult<T>(T result) => new(result);
 }
